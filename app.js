@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
     password: String,
     googleId: String,
     facebookId: String,
-    secret: String
+    secrets: []
 });
 
 // Setup passportLocalMongoose
@@ -104,11 +104,12 @@ app.get("/", function(req, res) {
 // Secret route get request
 app.get("/secrets", function(req, res) {
     // Find all secrets in DB in order to display them
-    User.find({ secret: { $ne: null } }, function(err, foundUsers) {
+    User.find({ secrets: {$exists: true, $ne: []} }, function(err, foundUsers) {
         if (err) {
             console.log(err);
         } else {
             if (foundUsers) {
+                console.log(foundUsers);
                 res.render("secrets", { usersWithSecrets: foundUsers });
             }
         }
@@ -133,13 +134,29 @@ app.post("/submit", function(req, res) {
             console.log(err);
         } else {
             if (foundUser) {
-                foundUser.secret = submittedSecret;
+                foundUser.secrets.push(submittedSecret);
             }
             foundUser.save();
             res.redirect("/secrets");
         }
     });
 });
+
+// app.post("/submit", function(req, res) {
+//     const submittedSecret = req.body.secret;
+//     // Passport saves req.user
+//     User.findById(req.user._id, function(err, foundUser) {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             if (foundUser) {
+//                 foundUser.secret = submittedSecret;
+//             }
+//             foundUser.save();
+//             res.redirect("/secrets");
+//         }
+//     });
+// });
 
 // Register route get request
 app.get("/register", function(req, res) {

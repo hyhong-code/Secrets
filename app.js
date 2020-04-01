@@ -68,7 +68,8 @@ passport.use(
         {
             clientID: process.env.GG_ID,
             clientSecret: process.env.GG_SECRET,
-            callbackURL: "http://localhost:3000/auth/google/secrets"
+            callbackURL:
+                "https://pumpkin-pie-62020.herokuapp.com/auth/google/secrets"
         },
         function(accessToken, refreshToken, profile, cb) {
             User.findOrCreate({ googleId: profile.id }, function(err, user) {
@@ -84,7 +85,8 @@ passport.use(
         {
             clientID: process.env.FB_ID,
             clientSecret: process.env.FB_SECRET,
-            callbackURL: "http://localhost:3000/auth/facebook/secrets"
+            callbackURL:
+                "https://pumpkin-pie-62020.herokuapp.com/auth/facebook/secrets"
         },
         function(accessToken, refreshToken, profile, cb) {
             User.findOrCreate({ facebookId: profile.id }, function(err, user) {

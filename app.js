@@ -69,7 +69,7 @@ passport.use(
             clientID: process.env.GG_ID,
             clientSecret: process.env.GG_SECRET,
             callbackURL:
-                "https://pumpkin-pie-62020.herokuapp.com/auth/google/secrets"
+                "https://secrets-sharing-app.herokuapp.com/auth/google/secrets"
         },
         function(accessToken, refreshToken, profile, cb) {
             User.findOrCreate({ googleId: profile.id }, function(err, user) {
@@ -86,7 +86,7 @@ passport.use(
             clientID: process.env.FB_ID,
             clientSecret: process.env.FB_SECRET,
             callbackURL:
-                "https://pumpkin-pie-62020.herokuapp.com/auth/facebook/secrets"
+                "https://secrets-sharing-app.herokuapp.com/auth/facebook/secrets"
         },
         function(accessToken, refreshToken, profile, cb) {
             User.findOrCreate({ facebookId: profile.id }, function(err, user) {
@@ -141,22 +141,6 @@ app.post("/submit", function(req, res) {
         }
     });
 });
-
-// app.post("/submit", function(req, res) {
-//     const submittedSecret = req.body.secret;
-//     // Passport saves req.user
-//     User.findById(req.user._id, function(err, foundUser) {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             if (foundUser) {
-//                 foundUser.secret = submittedSecret;
-//             }
-//             foundUser.save();
-//             res.redirect("/secrets");
-//         }
-//     });
-// });
 
 // Register route get request
 app.get("/register", function(req, res) {

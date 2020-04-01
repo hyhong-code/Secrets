@@ -1,6 +1,17 @@
-
 body {
-  background-color: #E8ECEF;
+    background-color: #e8ecef;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.7rem;
+    padding-top: 5%;
+}
+
+.linkedin {
+    color: #0e76a8;
+    text-decoration: none;
+    font-size: 1.6rem;
 }
 
 .centered {
@@ -9,8 +20,8 @@ body {
 }
 
 .secret-text {
-  text-align: center;
-  font-size: 2rem;
-  color: #fff;
-  background-color: #000;
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    background-color: #000;
 }
